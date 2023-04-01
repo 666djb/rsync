@@ -1,0 +1,38 @@
+name: rsync
+version: 1.6.0
+slug: rsync
+description: Sync folders from a remote machine via ssh and rsync.
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+homeassistant: 0.115.0
+boot: manual
+init: false
+ports: {}
+ports_description: {}
+map:
+  - share:rw
+  - config:rw
+  - backup:rw
+  - addons:rw
+  - ssl:rw
+  - media:rw
+schema:
+  private_key_file: match(^/ssl/.+)
+  username: str
+  folders:
+    - source: str
+      destination: str
+      options: str?
+  remote_host: str
+  remote_port: port?
+options:
+  private_key_file: /ssl/rsync/id_rsa
+  username: user
+  folders:
+    - source: /home/user
+      destination: /config
+  remote_host: ""
